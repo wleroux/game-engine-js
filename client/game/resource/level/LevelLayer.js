@@ -8,6 +8,7 @@ define(['resource/image/Image', 'game'], function (Image, game) {
       this.parallax = [0, 0];
       this.tile_definitions = [];
       this.tiles = [];
+      this.type = [];
       this.entities = [];
    }
    
