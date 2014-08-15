@@ -1,29 +1,23 @@
-/*jslint node:true*/
+/*jslint node:true, vars:true*/
 'use strict';
+
+var levelLoader = require('../resource/level');
 
 module.exports = function (character) {
    return function (message) {
-      if (message.animation) {
-         character.setAnimation(message.animation);
-      }
-
       if (message.direction !== undefined) {
          character.setDirection(message.direction);
       }
-      
-      if (character.position.x + message.dx < 0) {
-         message.dx = 0;
-      }
-      if (character.position.y + message.dy < 0) {
-         message.dy = 0;
-      }
 
-      if (message.dx || message.dy) {
+      var level = levelLoader(character.position.level);
+      var nx = character.position.x + message.dx;
+      var ny = character.position.y + message.dy;
+      if (!level.isBlocked(character.position.layer, nx, ny)) {
          character.setPosition(
             character.position.level,
             character.position.layer,
-            character.position.x + message.dx,
-            character.position.y + message.dy
+            nx,
+            ny
          );
       }
    };
