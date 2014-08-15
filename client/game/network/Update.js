@@ -52,8 +52,8 @@ define(['game', 'config/options', 'command/queue', 'entity/Character', 'resource
       Object.keys(game.characters).filter(function (characterId) {
          return characterIds.indexOf(characterId) === -1;
       }).forEach(function (characterId) {
-         game[characterId].remove();
-         delete game[characterId];
+         game.characters[characterId].remove();
+         delete game.characters[characterId];
       });
 
       // Reconcile World State
