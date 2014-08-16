@@ -17,11 +17,17 @@ define(['q', 'resource/textLoader', './Level', 'resource/image/Image'], function
 
                layer.offset = jsonLayer.offset;
                layer.parallax = jsonLayer.parallax;
-               layer.setTileDefinitions(jsonLayer.tile_definitions.map(function (tileset) {
-                  return new Image(tileset);
-               }));
-               layer.setTiles(jsonLayer.tiles);
-               layer.type = jsonLayer.type;
+               if (jsonLayer.tile_definitions) {
+                  layer.setTileDefinitions(jsonLayer.tile_definitions.map(function (tileset) {
+                     return new Image(tileset);
+                  }));
+               }
+               if (jsonLayer.tiles) {
+                  layer.setTiles(jsonLayer.tiles);
+               }
+               if (jsonLayer.type) {
+                  layer.type = jsonLayer.type;
+               }
             });
          }).done();
          

@@ -6,7 +6,7 @@ module.exports = {
    fps: 20,
    startPosition: {
       level: "asset/level/default.level",
-      layer: 1,
+      layer: 2,
       x: 0,
       y: 0
    }

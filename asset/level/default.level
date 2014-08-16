@@ -1,5 +1,6 @@
 {
    "layers": [{
+      "name": "Dirt",
       "offset": [0, 0],
       "tile_definitions": [
          "asset/images/tileset/dirt.png"
@@ -28,6 +29,7 @@
          [[0, 1, 3], [0, 1, 3], [0, 1, 3], [0, 1, 3], [0, 1, 3], [0, 1, 3], [0, 1, 3], [0, 1, 3], [0, 1, 3], [0, 1, 3], [0, 1, 3], [0, 1, 3], [0, 1, 3], [0, 1, 3], [0, 1, 3], [0, 1, 3], [0, 1, 3], [0, 1, 3], [0, 1, 3], [0, 1, 3]]
       ]
    }, {
+      "name": "Grass",
       "offset": [0, 0],
       "tile_definitions": [
          "asset/images/tileset/grass.png"
@@ -54,7 +56,11 @@
          [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
          [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
          [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
-      ],
+      ]
+   }, {
+      "name": "Walk Area",
+      "offset": [0, 0],
+      "parallax": [0, 0],
       "type": [
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
