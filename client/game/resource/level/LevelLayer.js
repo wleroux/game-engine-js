@@ -10,7 +10,56 @@ define(['resource/image/Image', 'game'], function (Image, game) {
       this.tiles = [];
       this.type = [];
       this.entities = [];
+      this.tilesRender = null;
    }
+   
+   LevelLayer.prototype.setTileDefinitions = function setTileDefinitions(tile_definitions) {
+      this.tile_definitions = tile_definitions;
+      this.tilesRender = null;
+   };
+   
+   LevelLayer.prototype.setTiles = function setTiles(tiles) {
+      this.tiles = tiles;
+      this.tilesRender = null;
+   };
+   
+   LevelLayer.prototype.renderTiles = function renderTiles(ctx) {
+      if (this.tilesRender === null) {
+         var isLoaded = this.tile_definitions.every(function (tile_definition) {
+            return tile_definition.isLoaded();
+         });
+
+         if (isLoaded) {
+            // Cache layer
+            this.tilesRender = document.createElement('canvas');
+            this.tilesRender.width = this.tiles.reduce(function (prev, curr) {
+               return prev > curr.length ? prev : curr.length;
+            }, 0) * 32;
+            this.tilesRender.height = this.tiles.length * 32;
+
+            var tilesCtx = this.tilesRender.getContext('2d');
+            this.tiles.forEach(function (row, rowIndex) {
+               tilesCtx.save();
+               tilesCtx.translate(0, rowIndex * 32);
+               row.forEach(function (tile, tileIndex) {
+                  if (tile !== null) {
+                     this.tile_definitions[tile[0]].render(tilesCtx, tile[1] * 32, tile[2] * 32, 32, 32);
+                  }
+                  tilesCtx.translate(32, 0);
+               }.bind(this));
+               tilesCtx.restore();
+            }.bind(this));
+         }
+      }
+      
+      if (this.tilesRender !== null) {
+         ctx.drawImage(this.tilesRender, 0, 0, this.tilesRender.width, this.tilesRender.height);
+      }
+   };
+
+   LevelLayer.prototype.getTiles = function getTiles() {
+      return this.tiles;
+   };
    
    LevelLayer.prototype.removeEntity = function removeEntity(entity) {
       this.entities.splice(this.entities.indexOf(entity), 1);
@@ -60,17 +109,7 @@ define(['resource/image/Image', 'game'], function (Image, game) {
       );
 
       // Render Tiles
-      this.tiles.forEach(function (row, rowIndex) {
-         ctx.save();
-         ctx.translate(0, rowIndex * 32);
-         row.forEach(function (tile, tileIndex) {
-            if (tile !== null) {
-               this.tile_definitions[tile[0]].render(ctx, tile[1] * 32, tile[2] * 32, 32, 32);
-            }
-            ctx.translate(32, 0);
-         }.bind(this));
-         ctx.restore();
-      }.bind(this));
+      this.renderTiles(ctx);
       
       // Render Entities
       this.entities.sort(function (a, b) {

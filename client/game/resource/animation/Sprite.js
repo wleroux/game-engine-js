@@ -5,7 +5,6 @@ define(['resource/image/Image'], function (Image) {
 
    function Sprite(file, x, y, width, height) {
       this.file = file;
-      this.image = new Image(file);
       this.x = x;
       this.y = y;
       this.width = width;
@@ -13,13 +12,12 @@ define(['resource/image/Image'], function (Image) {
    }
 
    Sprite.prototype.render = function render(ctx, actor) {
-      var image;
+      var image = null;
       switch (this.file) {
       case "BODY":
          image = actor.body;
          break;
       default:
-         image = this.image;
       }
       
       if (image !== null) {

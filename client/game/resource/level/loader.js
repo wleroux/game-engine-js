@@ -17,10 +17,10 @@ define(['q', 'resource/textLoader', './Level', 'resource/image/Image'], function
 
                layer.offset = jsonLayer.offset;
                layer.parallax = jsonLayer.parallax;
-               layer.tile_definitions = jsonLayer.tile_definitions.map(function (tileset) {
+               layer.setTileDefinitions(jsonLayer.tile_definitions.map(function (tileset) {
                   return new Image(tileset);
-               });
-               layer.tiles = jsonLayer.tiles;
+               }));
+               layer.setTiles(jsonLayer.tiles);
                layer.type = jsonLayer.type;
             });
          }).done();
