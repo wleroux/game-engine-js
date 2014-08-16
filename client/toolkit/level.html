@@ -1,0 +1,100 @@
+<!DOCTYPE html5>
+<html>
+<head>
+   <title>Level Editor</title>
+   <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+   <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />
+   <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body class="container">
+<div class="header">
+   <h1>Level Editor</h1>
+</div>
+
+<div class="row" style="padding-bottom: 16px">
+   <div class="col-sm-9 col-md-9">
+      <ul class="nav nav-tabs">
+         <li class="active"><a href="#">Tiles</a>
+         <li><a href="#">Type</a>
+         <li><a href="#">Game</a>
+      </ul>
+      <canvas style="width: 100%; height: 640px; border:1px dashed #000000;"></canvas>
+   </div>
+   <div class="col-sm-3 col-md-3">
+      <div class="row" style="padding-bottom: 16px">
+         <div class="input-group">
+            <input class="form-control" value="Layer Name"></input>
+            <div class="dropdown input-group-btn">
+               <button class="btn btn-default dropdown-toggle form-control" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                  Action
+                  <span class="caret"></span>
+               </button>
+               <ul class="dropdown-menu">
+                  <li role="presentation"><a href="#">Change to Layer 1</a></li>
+                  <li role="presentation"><a href="#">Change to Layer 2</a></li>
+                  <li role="presentation" class="divider"></li>
+                  <li role="presentation"><a href="#">Add Layer After</a></li>
+                  <li role="presentation"><a href="#">Add Layer Before</a></li>
+                  <li role="presentation" class="divider"></li>
+                  <li role="presentation"><a href="#">Delete</a></li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <ul class="nav nav-tabs">
+            <li class="active"><a href="#">Palette</a></li>
+            <li><a href="#">Properties</a></li>
+         </ul>
+
+         <div class="panel panel-default">
+            <div class="input-group">
+               <input class="form-control" value="Tile Definition"></input>
+               <div class="dropdown input-group-btn">
+                  <button class="btn btn-default dropdown-toggle form-control" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                     Action
+                     <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                     <li role="presentation"><a href="#">Change to Tile Definition 1</a></li>
+                     <li role="presentation"><a href="#">Change to Tile Definition 2</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li role="presentation"><a href="#">Add New Tile Definition</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li role="presentation"><a href="#">Delete</a></li>
+                  </ul>
+               </div>
+            </div>
+            <canvas style="width: 100%; height: 120px; border:1px dashed #000000;"></canvas>
+         </div>
+         <div class="panel panel-default">
+            <div class="panel-body">
+               <div class="form-group">
+                  <label>Offset: </label>
+                  <div class="input-group">
+                     <input class="form-control" placeholder="x" style="width: 50%"></input>
+                     <input class="form-control" placeholder="y" style="width: 50%"></input>
+                  </div>
+               </div>
+
+               <div class="form-group">
+                  <label>Parallax: </label>
+                  <div class="input-group">
+                     <input class="form-control" placeholder="horizontal" style="width: 50%"></input>
+                     <input class="form-control" placeholder="vertical" style="width: 50%"></input>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="row">
+   <div class="col-sm-12 col-md-12">
+      <button class="btn btn-default">Load</button>
+      <button class="btn btn-default">Save</button>
+   </div>
+</div>
+</body>
+</html>
