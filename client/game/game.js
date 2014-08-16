@@ -3,11 +3,17 @@
 define(['Camera'], function (Camera) {
    'use strict';
 
-   // set up canvas
+   // Set up canvas
    var canvas = document.getElementById("game");
    var ctx = canvas.getContext("2d");
-   canvas.width = 800;
-   canvas.height = 640;
+
+   // Use up entire viewport
+   canvas.width = window.innerWidth;
+   canvas.height = window.innerHeight;
+   window.addEventListener('resize', function () {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+   });
 
    return {
       context: ctx,

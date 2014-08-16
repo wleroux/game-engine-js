@@ -104,8 +104,8 @@ define(['resource/image/Image', 'game'], function (Image, game) {
          1 + this.parallax[1] - focus[0].layers[focus[1]].parallax[1]
       ];
       ctx.translate(
-         ctx.canvas.width / 2 - Math.floor(focus[2].get() * effective_parallax[0]),
-         ctx.canvas.height / 2 - Math.floor(focus[3].get() * effective_parallax[1])
+         Math.floor(ctx.canvas.width / 2) - Math.floor(focus[2].get() * effective_parallax[0]),
+         Math.floor(ctx.canvas.height / 2) - Math.floor(focus[3].get() * effective_parallax[1])
       );
 
       // Render Tiles
