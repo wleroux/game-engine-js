@@ -1,6 +1,6 @@
 /*jslint vars:true*/
 /*global define:false*/
-define(['./keyboard', 'game', 'command/queue', 'command/Move'], function (keyboard, game, queue, Move) {
+define(['./keyboard', 'game', 'command/queue', 'command/Move', 'command/Attack'], function (keyboard, game, queue, Move, Attack) {
    'use strict';
    
    function Controller() {
@@ -16,29 +16,45 @@ define(['./keyboard', 'game', 'command/queue', 'command/Move'], function (keyboa
          return;
       }
       
-      var move = new Move(this.character);
-      
-      var speed = 160;
-      move.dx = (keyboard.isPressed('RIGHT') - keyboard.isPressed('LEFT')) * speed * dt;
-      move.dy = (keyboard.isPressed('DOWN') - keyboard.isPressed('UP')) * speed * dt;
+      // Movement
+      var state = this.character.animator.state;
+      if (state === "idle" || state === "walk") {
+         var speed = 160;
+         var dx = (keyboard.isPressed('RIGHT') - keyboard.isPressed('LEFT')) * speed * dt;
+         var dy = (keyboard.isPressed('DOWN') - keyboard.isPressed('UP')) * speed * dt;
+         var direction;
+         if (dy < 0) {
+            direction = 0;
+         } else if (dx < 0) {
+            direction = 1;
+         } else if (dy > 0) {
+            direction = 2;
+         } else if (dx > 0) {
+            direction = 3;
+         }
 
-      var direction;
-      if (move.dy < 0) {
-         direction = 0;
-      } else if (move.dx < 0) {
-         direction = 1;
-      } else if (move.dy > 0) {
-         direction = 2;
-      } else if (move.dx > 0) {
-         direction = 3;
+         if (dx !== 0 || dy !== 0 || direction !== this.character.direction) {
+            var move = new Move(this.character);
+            if (dx !== 0 || dy !== 0) {
+               move.dx = dx;
+               move.dy = dy;
+            }
+            if (direction !== this.character.direction) {
+               move.direction = direction;
+            }
+
+            queue.send(move);
+         }
+         this.character.animator.setParameter('speed', dx * dx + dy * dy);
+
+         // Attack
+         var attack = keyboard.isPressed('ATTACK');
+         if (attack) {
+            queue.send(new Attack());
+            
+            this.character.animator.setParameter('attack', true);
+         }
       }
-      if (direction !== this.character.direction) {
-         move.direction = direction;
-      }
-
-      this.character.animator.setParameter('speed', move.dx * move.dx + move.dy * move.dy);
-
-      queue.send(move);
    };
    
    return new Controller();

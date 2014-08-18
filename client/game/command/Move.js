@@ -9,23 +9,20 @@ define(['./Command', 'math/Constant'], function (Command, Constant) {
       this.dx = null;
       this.dy = null;
       this.direction = undefined;
-      this.animation = null;
    }
    Move.prototype = Object.create(Command.prototype);
    Move.prototype.constructor = Move;
    
    Move.prototype.isNoop = function isNoop() {
-      return !this.dx && !this.dy && this.direction === undefined && !this.animation;
+      return !this.dx && !this.dy && this.direction === undefined;
    };
    
    Move.prototype.send = function (socket) {
       socket.emit('move', {
          timestamp: this.timestamp,
-         id: this.character.id,
          dx: this.dx,
          dy: this.dy,
-         direction: this.direction,
-         animation: this.animation
+         direction: this.direction
       });
    };
    

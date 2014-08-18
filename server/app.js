@@ -22,10 +22,12 @@ function timestamped(socket, callback) {
 var server = require('./server');
 var characters = {};
 var move = require('./command/Move');
+var attack = require('./command/Attack');
 io.on('connection', function (socket) {
    var character = new Character(UUID(), server.startPosition);
    socket.emit("connected", character.id);
    socket.on('move', timestamped(socket, move(character)));
+   socket.on('attack', timestamped(socket, attack(character)));
    socket.on('disconnect', function () {
       io.emit('remove', character.id);
 
@@ -47,11 +49,15 @@ setInterval(function () {
       time: Date.now(),
       last_message: 0,
       characters: values(characters).map(function (character) {
+         var triggers = character.triggers;
+         character.triggers = [];
+         
          return {
             id: character.id,
             body: character.body,
             direction: character.direction,
-            position: character.position
+            position: character.position,
+            triggers: triggers
          };
       })
    };

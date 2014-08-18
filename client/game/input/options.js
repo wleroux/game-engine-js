@@ -4,7 +4,7 @@ define([], function () {
    
    function Options() {
       this.code = {
-         32: 'FIRE',
+         32: 'ATTACK',
          37: 'LEFT',
          38: 'UP',
          39: 'RIGHT',

@@ -43,5 +43,9 @@ define([], function () {
       this.steps.push(step);
    };
    
+   Animation.prototype.isDone = function isDone(timer) {
+      return this.duration() < timer;
+   };
+   
    return Animation;
 });

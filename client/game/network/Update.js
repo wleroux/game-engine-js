@@ -41,6 +41,10 @@ define(['game', 'config/options', 'command/queue', 'entity/Character', 'resource
                x,
                y
             );
+            
+            characterMessage.triggers.forEach(function (trigger) {
+               character.animator.setParameter(trigger, true);
+            });
          }
          character.lastUpdate = message.time;
       });

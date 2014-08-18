@@ -16,6 +16,7 @@ function Character(id, position) {
       y: position.y
    };
    this.direction = 2;
+   this.triggers = [];
 }
 
 Character.prototype.setDirection = function setDirection(direction) {
