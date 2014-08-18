@@ -5,8 +5,14 @@ define(['resource/animation/loader'], function (animationLoader) {
 
    function AnimationController() {
       this.parameters = {};
+      this.state = "idle";
       this.lastState = null;
       this.timer = 0;
+      
+      this.animations = {
+         "idle": animationLoader.get("asset/animation/idle.ani"),
+         "walk": animationLoader.get("asset/animation/walk.ani")
+      };
    }
    
    AnimationController.prototype.setParameter = function setParameter(parameter, value) {
@@ -18,22 +24,26 @@ define(['resource/animation/loader'], function (animationLoader) {
    };
    
    AnimationController.prototype.render = function render(ctx, actor) {
-      // Determine Animation To Play
-      var state = animationLoader.get('asset/animation/idle.ani');
+      this.lastState = this.state;
       
-      // Walking?
-      if (this.parameters.speed && this.parameters.speed !== 0) {
-         state = animationLoader.get('asset/animation/walk.ani');
+      // Get new state
+      if (this.state === "idle") {
+         if (this.parameters.speed !== 0) {
+            this.state = "walk";
+         }
+      } else if (this.state === "walk") {
+         if (this.parameters.speed === 0) {
+            this.state = "idle";
+         }
       }
-      
+
       // Reset Timer if needed
-      if (this.lastState === null || this.lastState !== state) {
+      if (this.lastState === null || this.lastState !== this.state) {
          this.timer = 0;
       }
 
       // Render
-      state.render(ctx, this.timer, actor);
-      this.lastState = state;
+      this.animations[this.state].render(ctx, this.timer, actor);
    };
    
    return AnimationController;
