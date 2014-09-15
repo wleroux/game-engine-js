@@ -13,9 +13,9 @@ server
 
 The server folder contains the code to run the game server
 
-asset
+common
 ---
 
-The asset folder contains the game's resources
+Resources that are available to both client and server
 
 

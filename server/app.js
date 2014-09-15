@@ -10,6 +10,7 @@ var UUID = require('node-uuid');
 var Character = require('./entity/Character');
 
 app.use(express['static'](__dirname + '/../client'));
+app.use('/bower_components', express['static'](__dirname + '/../bower_components'));
 app.use('/asset', express['static'](__dirname + '/../asset'));
 
 function timestamped(socket, callback) {
@@ -69,7 +70,7 @@ setInterval(function () {
    });
 }, 1000 / server.fps);
 
-var port = 3000;
+var port = process.env.PORT | 3000;
 http.listen(port, function () {
    console.log('listening on *:' + port);
 });
