@@ -1,5 +1,4 @@
-/*global define:false*/
-define({
+module.exports = {
    lag: {
       client_lag: 0,
       server_lag: 0,
@@ -7,4 +6,4 @@ define({
       reconcilation: true,
       interpolation: true
    }
-});
+};

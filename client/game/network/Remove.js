@@ -1,11 +1,9 @@
-/*global define:false*/
-define(['game'], function (game) {
-   'use strict';
+var game = require('../game');
 
-   return function (id) {
-      if (game.characters[id]) {
-         game.characters[id].remove();
-         delete game.characters[id];
-      }
-   };
-});
+module.exports = function (id) {
+   if (game.characters[id]) {
+      game.characters[id].remove();
+      delete game.characters[id];
+   }
+};
+

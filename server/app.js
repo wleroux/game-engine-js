@@ -9,9 +9,12 @@ var io = require('socket.io')(http);
 var UUID = require('node-uuid');
 var Character = require('./entity/Character');
 
+
 app.use(express['static'](__dirname + '/../client'));
 app.use('/bower_components', express['static'](__dirname + '/../bower_components'));
 app.use('/asset', express['static'](__dirname + '/../asset'));
+app.use('/', express['static'](__dirname + '/../dist'));
+
 
 function timestamped(socket, callback) {
    return function (message) {

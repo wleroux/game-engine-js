@@ -1,24 +1,21 @@
-/*jslint vars:true*/
-/*global define:false*/
-define(['Camera'], function (Camera) {
-   'use strict';
+var Camera = require('./Camera');
 
-   // Set up canvas
-   var canvas = document.getElementById("game");
-   var ctx = canvas.getContext("2d");
+// Set up canvas
+var canvas = document.getElementById("game");
+var ctx = canvas.getContext("2d");
 
-   // Use up entire viewport
+// Use up entire viewport
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+window.addEventListener('resize', function () {
    canvas.width = window.innerWidth;
    canvas.height = window.innerHeight;
-   window.addEventListener('resize', function () {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-   });
-
-   return {
-      context: ctx,
-      camera: new Camera(),
-      currentCharacter: null,
-      characters: {}
-   };
 });
+
+module.exports = {
+   context: ctx,
+   camera: new Camera(),
+   currentCharacter: null,
+   characters: {}
+};
+

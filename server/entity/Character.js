@@ -1,7 +1,3 @@
-
-/*jslint node:true*/
-'use strict';
-
 function Character(id, position) {
    this.id = id;
    this.body = [
