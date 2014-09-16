@@ -1,5 +1,5 @@
-var Animation = require('../../../client/game/resource/animation/Animation');
-var AnimationStep = require('../../../client/game/resource/animation/AnimationStep');
+var Animation = require('../../../client/resource/animation/Animation');
+var AnimationStep = require('../../../client/resource/animation/AnimationStep');
 
 describe("Animation", function () {
    var ani;

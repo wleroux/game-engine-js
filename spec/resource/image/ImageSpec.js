@@ -1,5 +1,5 @@
-var imageLoader = require('../../../client/game/resource/image/loader');
-var Image = require('../../../client/game/resource/image/Image');
+var imageLoader = require('../../../client/resource/image/loader');
+var Image = require('../../../client/resource/image/Image');
 
 describe("Image", function () {
   beforeEach(function () {

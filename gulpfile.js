@@ -1,6 +1,7 @@
 var gulp = require('./gulp')([
-  'browserify'
+  'browserify',
+  'copy'
 ])
 
-gulp.task('default', ['browserify']);
+gulp.task('default', ['browserify', 'copy']);
 
