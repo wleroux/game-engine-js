@@ -19,7 +19,7 @@ Controller.prototype.update = function update(dt) {
    
    // Movement
    var state = this.character.animator.state;
-   if (state === "idle" || state === "walk") {
+   if (state === "IDLE" || state === "WALK") {
       var speed = 160;
       var dx = (keyboard.isPressed('RIGHT') - keyboard.isPressed('LEFT')) * speed * dt;
       var dy = (keyboard.isPressed('DOWN') - keyboard.isPressed('UP')) * speed * dt;
@@ -47,14 +47,6 @@ Controller.prototype.update = function update(dt) {
          queue.send(move);
       }
       this.character.animator.setParameter('speed', dx * dx + dy * dy);
-
-      // Attack
-      var attack = keyboard.isPressed('ATTACK');
-      if (attack) {
-         queue.send(new Attack());
-         
-         this.character.animator.setParameter('attack', true);
-      }
    }
 };
 

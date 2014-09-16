@@ -1,55 +1,44 @@
-var animationLoader = require('../loader');
+var animationRenderer= require('../index');
 
-var animations = {
-   "idle": animationLoader.get("asset/animation/idle.ani"),
-   "walk": animationLoader.get("asset/animation/walk.ani"),
-   "attack": animationLoader.get("asset/animation/attack.ani")
-};
-var fallbackState = {
-   "attack": "idle"
-};
+var STATES = {
+  IDLE: "asset/animation/idle.ani",
+  WALK: "asset/animation/walk.ani"
+}
 
 function AnimationController() {
-   this.parameters = {};
-   this.state = "idle";
-   this.lastState = null;
-   this.timer = 0;
+  this.parameters = {
+    speed: 0
+  };
+  this.state = "IDLE";
+  this.lastState = null;
+  this.timer = 0;
 }
 
 AnimationController.prototype.setParameter = function setParameter(parameter, value) {
-   this.parameters[parameter] = value;
+  this.parameters[parameter] = value;
 };
 
 AnimationController.prototype.update = function update(dt) {
-   this.timer += dt;
+  this.timer += dt;
 };
 
 AnimationController.prototype.render = function render(ctx, actor) {
-   this.lastState = this.state;
-   
-   // When a state is done, return to fallback state
-   if (animations[this.state].isDone(this.timer)) {
-      this.state = fallbackState[this.state] || this.state;
-   }
-   
-   // Get new state
-   if (this.state === "idle" && this.parameters.speed !== 0) {
-      this.state = "walk";
-   } else if (this.state === "walk" && this.parameters.speed === 0) {
-      this.state = "idle";
-   }
-   if ((this.state === "idle" || this.state === "walk") && this.parameters.attack === true) {
-      this.setParameter("attack", false);
-      this.state = "attack";
-   }
+  this.lastState = this.state;
 
-   // Reset Timer if needed
-   if (this.lastState === null || this.lastState !== this.state) {
-      this.timer = 0;
-   }
+  // Get new state
+  if (this.state === "IDLE" && this.parameters.speed !== 0) {
+     this.state = "WALK";
+  } else if (this.state === "WALK" && this.parameters.speed === 0) {
+     this.state = "IDLE";
+  }
 
-   // Render
-   animations[this.state].render(ctx, this.timer, actor);
+  // Reset Timer if needed
+  if (this.lastState === null || this.lastState !== this.state) {
+     this.timer = 0;
+  }
+
+  // Render
+  animationRenderer.render(ctx, STATES[this.state], this.timer, actor);
 };
 
 module.exports = AnimationController;

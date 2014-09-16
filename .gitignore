@@ -2,3 +2,6 @@ node_modules
 bower_components
 /.brackets.json
 /dist
+.DS_Store
+
+

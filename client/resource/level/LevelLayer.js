@@ -1,5 +1,5 @@
-var Image = require('../image/Image');
 var game = require('../../game');
+var imageRenderer = require('../image');
 
 function LevelLayer() {
    this.offset = [0, 0];
@@ -24,7 +24,11 @@ LevelLayer.prototype.setTiles = function setTiles(tiles) {
 LevelLayer.prototype.renderTiles = function renderTiles(ctx) {
    if (this.tilesRender === null) {
       var isLoaded = this.tile_definitions.every(function (tile_definition) {
-         return tile_definition.isLoaded();
+        if (!imageRenderer.isLoaded(tile_definition)) {
+          imageRenderer.load(tile_definition);
+          return false;
+        }
+        return true;
       });
 
       if (isLoaded) {
@@ -41,7 +45,7 @@ LevelLayer.prototype.renderTiles = function renderTiles(ctx) {
             tilesCtx.translate(0, rowIndex * 32);
             row.forEach(function (tile, tileIndex) {
                if (tile !== null) {
-                  this.tile_definitions[tile[0]].render(tilesCtx, tile[1] * 32, tile[2] * 32, 32, 32);
+                  imageRenderer.render(tilesCtx, this.tile_definitions[tile[0]], tile[1] * 32, tile[2] * 32, 32, 32);
                }
                tilesCtx.translate(32, 0);
             }.bind(this));

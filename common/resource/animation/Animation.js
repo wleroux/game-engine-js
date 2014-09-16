@@ -1,5 +1,4 @@
-function Animation(name) {
-   this.name = name;
+function Animation() {
    this.steps = [];
    this.repeat = false;
 }
@@ -18,13 +17,6 @@ Animation.prototype.currentStep = function currentStep(timer) {
             return leftover_timer < 0;
          }
       })[0];
-   }
-};
-
-Animation.prototype.render = function render(ctx, timer, actor) {
-   var step = this.currentStep(timer);
-   if (step) {
-      step.render(ctx, actor);
    }
 };
 

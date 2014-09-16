@@ -1,5 +1,5 @@
-var Animation = require('../../../client/resource/animation/Animation');
-var AnimationStep = require('../../../client/resource/animation/AnimationStep');
+var Animation = require('../../../common/resource/animation/Animation');
+var AnimationStep = require('../../../common/resource/animation/AnimationStep');
 
 describe("Animation", function () {
    var ani;
@@ -14,7 +14,7 @@ describe("Animation", function () {
    steps[0].duration = 4;
    steps[1].duration = 5;
    
-   describe("duration", function () {
+   describe("#duration", function () {
       it("should start at 0", function () {
          expect(ani.duration()).toBe(0);
       });
@@ -31,7 +31,7 @@ describe("Animation", function () {
       });
    });
    
-   describe("step", function () {
+   describe("#currentStep", function () {
       beforeEach(function () {
          ani.addStep(steps[0]);
          ani.addStep(steps[1]);

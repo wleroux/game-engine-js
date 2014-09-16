@@ -1,5 +1,3 @@
-var animationLoader = require('../resource/animation/loader');
-var Image = require('../resource/image/Image');
 var AnimationController = require('../resource/animation/controller/AnimationController');
 
 function Character(id) {
@@ -24,7 +22,7 @@ Character.prototype.remove = function remove() {
 };
 
 Character.prototype.setBody = function setBody(body) {
-   this.body = new Image(body);
+   this.body = body;
 };
 
 Character.prototype.setPosition = function setPosition(level, layer, x, y) {

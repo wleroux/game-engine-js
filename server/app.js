@@ -37,18 +37,18 @@ io.on('connection', function (socket) {
    characters[character.id] = character;
 });
 
-function values(map) {
-   return Object.keys(map).map(function (key) {
-      return map[key];
-   });
-}
+Object.values = function (map) {
+  return Object.keys(map).map(function (key) {
+    return map[key];
+  });
+};
 
 setInterval(function () {
    // Get all changes
    var update = {
       time: Date.now(),
       last_message: 0,
-      characters: values(characters).map(function (character) {
+      characters: Object.values(characters).map(function (character) {
          var triggers = character.triggers;
          character.triggers = [];
          
