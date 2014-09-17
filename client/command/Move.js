@@ -1,5 +1,5 @@
 var Command = require('./Command');
-var Constant = require('../math/Constant');
+var Constant = require('../math').Constant;
 
 function Move(character) {
    Command.apply(this);

@@ -2,9 +2,7 @@ var io = require('socket.io-client');
 
 var game = require('./game');
 var requestAnimationFrame = require('./shim/requestAnimationFrame');
-var Connect = require('./network/Connect');
-var Update = require('./network/Update');
-var Remove = require('./network/Remove');
+var network = require('./network');
 var controller = require('./input/controller');
 
 function update(dt) {
@@ -41,9 +39,9 @@ function main() {
 
 (function () {
   game.socket = io();
-  game.socket.on('connected', Connect);
-  game.socket.on('update', Update);
-  game.socket.on('remove', Remove);
+  game.socket.on('connected', network.Connect);
+  game.socket.on('update', network.Update);
+  game.socket.on('remove', network.Remove);
 
   requestAnimationFrame(main);
 })();

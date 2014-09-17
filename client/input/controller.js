@@ -1,8 +1,5 @@
 var keyboard = require('./keyboard');
-var game = require('../game');
-var queue = require('../command/queue');
-var Move = require('../command/Move');
-var Attack = require('../command/Attack');
+var command = require('../command');
 
 function Controller() {
    this.character = null;
@@ -35,7 +32,7 @@ Controller.prototype.update = function update(dt) {
       }
 
       if (dx !== 0 || dy !== 0 || direction !== this.character.direction) {
-         var move = new Move(this.character);
+         var move = new command.Move(this.character);
          if (dx !== 0 || dy !== 0) {
             move.dx = dx;
             move.dy = dy;
@@ -44,7 +41,7 @@ Controller.prototype.update = function update(dt) {
             move.direction = direction;
          }
 
-         queue.send(move);
+         command.queue.send(move);
       }
       this.character.animator.setParameter('speed', dx * dx + dy * dy);
    }

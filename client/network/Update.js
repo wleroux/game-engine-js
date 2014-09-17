@@ -3,8 +3,7 @@ var options = require('../config/options');
 var queue = require('../command/queue');
 var Character = require('../entity/Character');
 var levelLoader = require('../resource/level/loader');
-var Lerp = require('../math/Lerp');
-var Constant = require('../math/Constant');
+var math = require('../math');
 
 function update(message) {
    // Update World State
@@ -21,20 +20,20 @@ function update(message) {
          character.setPosition(
             levelLoader.get(characterMessage.position.level),
             characterMessage.position.layer,
-            new Constant(characterMessage.position.x),
-            new Constant(characterMessage.position.y)
+            new math.Constant(characterMessage.position.x),
+            new math.Constant(characterMessage.position.y)
          );
       } else {
-         var x = new Constant(characterMessage.position.x);
-         var y  = new Constant(characterMessage.position.y);
+         var x = new math.Constant(characterMessage.position.x);
+         var y  = new math.Constant(characterMessage.position.y);
          if (character.position !== null) {
             var interval = (message.time - character.lastUpdate) / 1000;
             var dx = (characterMessage.position.x - character.position[2].get()) / interval;
             var dy = (characterMessage.position.y - character.position[3].get()) / interval;
             character.animator.setParameter('speed', dx * dx + dy * dy);
             if (options.lag.interpolation) {
-               x = new Lerp(character.position[2].get(), characterMessage.position.x, interval);
-               y = new Lerp(character.position[3].get(), characterMessage.position.y, interval);
+               x = new math.Lerp(character.position[2].get(), characterMessage.position.x, interval);
+               y = new math.Lerp(character.position[3].get(), characterMessage.position.y, interval);
             }
          }
 
