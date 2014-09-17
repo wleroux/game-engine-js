@@ -1,5 +1,6 @@
 var Command = require('./Command');
 var Constant = require('../math').Constant;
+var levelRenderer = require('../renderer/level');
 
 function Move(character) {
    Command.apply(this);
@@ -40,6 +41,7 @@ Move.prototype.play = function () {
       var y = this.character.position[3].get();
       
       var dx = this.dx, dy = this.dy;
+      var level = levelRenderer.get(level);
       if (level.isBlocked(layer, x + this.dx, y + this.dy)) {
          dx = 0;
          dy = 0;

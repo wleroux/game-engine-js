@@ -2,23 +2,22 @@ var game = require('../game');
 var options = require('../config/options');
 var queue = require('../command/queue');
 var Character = require('../entity/Character');
-var levelLoader = require('../resource/level/loader');
 var math = require('../math');
 
 function update(message) {
    // Update World State
    message.characters.forEach(function (characterMessage) {
-      var character = game.characters[characterMessage.id];
+      var character = game.entities[characterMessage.id];
       if (!character) {
          character = new Character(characterMessage.id);
-         game.characters[characterMessage.id] = character;
+         game.entities[characterMessage.id] = character;
       }
 
       character.setBody(characterMessage.body);
       character.setDirection(characterMessage.direction);
       if (character === game.currentCharacter) {
          character.setPosition(
-            levelLoader.get(characterMessage.position.level),
+            characterMessage.position.level,
             characterMessage.position.layer,
             new math.Constant(characterMessage.position.x),
             new math.Constant(characterMessage.position.y)
@@ -38,7 +37,7 @@ function update(message) {
          }
 
          character.setPosition(
-            levelLoader.get(characterMessage.position.level),
+            characterMessage.position.level,
             characterMessage.position.layer,
             x,
             y
@@ -55,11 +54,11 @@ function update(message) {
    var characterIds = message.characters.map(function (characterMessage) {
       return characterMessage.id;
    });
-   Object.keys(game.characters).filter(function (characterId) {
+   Object.keys(game.entities).filter(function (characterId) {
       return characterIds.indexOf(characterId) === -1;
    }).forEach(function (characterId) {
-      game.characters[characterId].remove();
-      delete game.characters[characterId];
+      game.entities[characterId].remove();
+      delete game.entities[characterId];
    });
 
    // Reconcile World State

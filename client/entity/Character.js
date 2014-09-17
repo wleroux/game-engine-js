@@ -1,4 +1,4 @@
-var AnimationController = require('../resource/animation/controller/AnimationController');
+var AnimationController = require('../renderer/animation/controller/AnimationController');
 
 function Character(id) {
    this.id = id;
@@ -26,15 +26,6 @@ Character.prototype.setBody = function setBody(body) {
 };
 
 Character.prototype.setPosition = function setPosition(level, layer, x, y) {
-   if (this.position !== null) {
-      if (this.position[0] !== level || this.position[1] !== layer) {
-         this.position[0].removeEntity(this, this.position[1]);
-         level.addEntity(this, layer);
-      }
-   } else {
-      level.addEntity(this, layer);
-   }
-   
    this.position = [level, layer, x, y];
 };
 

@@ -1,6 +1,6 @@
 describe("ImageRenderer", function () {
   beforeEach(function () {
-    this.imageRenderer = require('../../../client/resource/image');
+    this.imageRenderer = require('../../../client/renderer/image');
   });
   
   var ctx;

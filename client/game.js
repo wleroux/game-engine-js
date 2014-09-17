@@ -16,6 +16,6 @@ module.exports = {
    context: ctx,
    camera: new Camera(),
    currentCharacter: null,
-   characters: {}
+   entities: {}
 };
 
