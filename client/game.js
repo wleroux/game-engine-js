@@ -15,7 +15,7 @@ window.addEventListener('resize', function () {
 module.exports = {
    context: ctx,
    camera: new Camera(),
-   currentCharacter: null,
+   avatar: null,
    entities: {}
 };
 

@@ -88,13 +88,17 @@ LevelRenderer.prototype.render = function (ctx, focus, entities) {
     ctx.drawImage(layerCanvas, 0, 0, layerCanvas.width, layerCanvas.height);
 
     // Draw entities on layer
-    entities.filter(function (entity) {
-      return (entity.position[0] === focus.level && entity.position[1] === focus.layer);
-    }).forEach(function (entity) {
+    var layerEntities = entities.filter(function (entity) {
+      return (entity.position.level === focus.level && entity.position.layer === focus.layer);
+    });
+    layerEntities.sort(function (a, b) {
+      return a.position.y.get() <= b.position.y.get() ? -1 : 1;
+    });
+    layerEntities.forEach(function (entity) {
       ctx.save();
       ctx.translate(
-        Math.floor(entity.position[2].get()),
-        Math.floor(entity.position[3].get())
+        Math.floor(entity.position.x.get()),
+        Math.floor(entity.position.y.get())
       );
       entity.render(ctx);
       ctx.restore();

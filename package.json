@@ -12,8 +12,10 @@
   },
   "dependencies": {
     "express": "^4.9.0",
+    "flux": "^2.0.1",
     "node-uuid": "^1.4.1",
     "q": "^1.0.1",
+    "react": "^0.11.2",
     "socket.io": "^1.1.0",
     "socket.io-client": "^1.1.0"
   },

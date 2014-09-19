@@ -1,6 +1,5 @@
 function Options() {
    this.code = {
-      32: 'ATTACK',
       37: 'LEFT',
       38: 'UP',
       39: 'RIGHT',

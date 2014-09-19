@@ -1,5 +1,5 @@
 var textLoader = require('../textLoader');
-var animationLoader = require('../../../common/resource/animation');
+var animationLoader = require('../../../common/resource/animation/animationLoader');
 var imageRenderer = require('../image');
 
 var _cache = {};
