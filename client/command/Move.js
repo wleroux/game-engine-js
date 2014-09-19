@@ -31,7 +31,7 @@ Move.prototype.play = function () {
   }
 
   var entity = game.entities[game.avatar];
-  entity.direction = this.direction || entity.direction;
+  entity.direction = this.direction !== undefined ? this.direction :  entity.direction;
   if (this.dx || this.dy) {
     var x = entity.position.x.get() + this.dx;
     var y = entity.position.y.get() + this.dy;

@@ -25,6 +25,10 @@ var entityGenerator = require('./entity/generator');
 io.on('connection', function (socket) {
   socket.id = UUID();
   socket.dispatchToken = gameDispatcher.register(function (payload) {
+    if (payload.source !== socket.id) {
+      return true;
+    }
+
     switch (payload.actionType) {
     case "connect":
       socket.emit('connected', socket.id);
@@ -33,11 +37,12 @@ io.on('connection', function (socket) {
       gameDispatcher.unregister(socket.dispatchToken);
       break;
     default:
-      if (payload.action.time) {
-        socket.lastMessage = payload.action.time;
+      if (payload.action.timestamp) {
+        socket.lastMessage = payload.action.timestamp;
       }
       break;
     }
+    return true;
   });
 
   var entity = entityGenerator.generate(socket.id);
@@ -51,14 +56,11 @@ var EntityStore = require('./entity/EntityStore');
 setInterval(function () {
   // Update client machines
   io.of('/').sockets.forEach(function (socket) {
-    var update = {
+    socket.emit('update', {
       time: Date.now(),
-      last_message: 0,
+      lastMessage: socket.lastMessage,
       entities: EntityStore.getRelevantEntitiesFor(socket.id)
-    };
-
-    update.last_message = socket.last_message;
-    socket.emit('update', update);
+    });
   });
 }, 1000 / 20);
 

@@ -23,8 +23,8 @@ var EntityStore = merge(EventEmitter.prototype, {
       case "move":
         var entity = _entities[payload.source];
         var level = levelLoader(entity.position.level);
-        entity.direction = action.direction;
-        if ( ! level.isBlocked(entity.position.layer, entity.position.x + action.dx, entity.position.y + action.dy)) {
+        entity.direction = action.direction !== undefined ? action.direction : entity.direction;
+        if (!level.isBlocked(entity.position.layer, entity.position.x + action.dx, entity.position.y + action.dy)) {
           entity.position.x += action.dx;
           entity.position.y += action.dy;
         }

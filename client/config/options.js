@@ -7,3 +7,6 @@ module.exports = {
       interpolation: true
    }
 };
+
+// Allow us to modify this!
+document.options = module.exports;
