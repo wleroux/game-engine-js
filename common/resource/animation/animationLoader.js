@@ -5,7 +5,7 @@ var Sprite = require('./Sprite');
 function AnimationLoader() {
 }
 
-AnimationLoader.prototype.load = function load(json) {
+function struct(json) {
   var animation = new Animation();
   animation.repeat = json.repeat;
    
@@ -29,6 +29,15 @@ AnimationLoader.prototype.load = function load(json) {
   });
 
   return animation;
+}
+
+AnimationLoader.prototype.load = function load(json) {
+  var animation = new Animation();
+  switch (json.format) {
+  case "struct":
+  default:
+    return struct(json);
+  }
 };
 
 module.exports = new AnimationLoader();
