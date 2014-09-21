@@ -5,7 +5,7 @@ function CommandQueue() {
    this.commands = [];
 }
 
-CommandQueue.prototype.replayAll = function replayAll() {
+CommandQueue.prototype.replayAll = function () {
    if (options.lag.reconcilation) {
       this.commands.forEach(function (command) {
          command.play();
@@ -13,7 +13,7 @@ CommandQueue.prototype.replayAll = function replayAll() {
    }
 };
 
-CommandQueue.prototype.send = function send(command) {
+CommandQueue.prototype.send = function (command) {
    if (command.isNoop()) {
       return;
    }
@@ -32,7 +32,7 @@ CommandQueue.prototype.send = function send(command) {
    }
 };
 
-CommandQueue.prototype.invalidate = function invalidate(timestamp) {
+CommandQueue.prototype.invalidate = function (timestamp) {
    this.commands = this.commands.filter(function (command) {
       return command.timestamp > timestamp;
    });

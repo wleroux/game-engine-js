@@ -23,6 +23,15 @@ AnimationRenderer.prototype.get = function (source) {
   return _cache[source];
 };
 
+AnimationRenderer.prototype.isDone = function (source, timer) {
+  if (this.isLoaded(source)) {
+    return this.get(source).isDone(timer);
+  } else {
+    this.load(source);
+    return false;
+  }
+};
+
 AnimationRenderer.prototype.render = function render(ctx, source, timer, actor) {
   if (!this.isLoaded(source)) {
     this.load(source);

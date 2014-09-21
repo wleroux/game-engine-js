@@ -9,13 +9,15 @@ function update(message) {
   // Update entities
   message.entities.forEach(function (jsonEntity) {
     var id = jsonEntity.id;
+    var localEntity = (id === game.avatar);
+    var entity;
     if (game.entities.hasOwnProperty(id)) {
-      var entity = game.entities[id];
+      entity = game.entities[id];
       entity.parts = jsonEntity.parts;
       entity.direction = jsonEntity.direction;
 
       var interpolationEnabled = options.lag.interpolation;
-      var shouldInterpolate = entity.id !== game.avatar && entity.position.level === jsonEntity.position.level && entity.position.layer === jsonEntity.position.layer;
+      var shouldInterpolate = !localEntity && entity.position.level === jsonEntity.position.level && entity.position.layer === jsonEntity.position.layer;
       if (interpolationEnabled && shouldInterpolate) {
         var interval = (message.time - lastUpdate) / 1000;
         var x = new math.Lerp(entity.position.x.get(), jsonEntity.position.x, interval);
@@ -31,7 +33,7 @@ function update(message) {
         y: y
       };
     } else {
-      var entity = new Entity(
+      entity = new Entity(
         jsonEntity.id,
         jsonEntity.parts,
         {
@@ -43,6 +45,12 @@ function update(message) {
         jsonEntity.direction
       );
       game.entities[entity.id] = entity;
+    }
+
+    if (!localEntity) {
+      jsonEntity.triggers.forEach(function (trigger) {
+        entity.trigger(trigger);
+      });
     }
   });
   lastUpdate = message.time;

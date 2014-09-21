@@ -48,6 +48,7 @@ io.on('connection', function (socket) {
   var entity = entityGenerator.generate(socket.id);
   dispatch(entity.id, 'connect')(entity);
   socket.on('move', dispatch(entity.id, 'move'));
+  socket.on('slash', dispatch(entity.id, 'slash'));
   socket.on('disconnect', dispatch(entity.id, 'disconnect'));
 });
 
@@ -62,6 +63,7 @@ setInterval(function () {
       entities: EntityStore.getRelevantEntitiesFor(socket.id)
     });
   });
+  EntityStore.consumeTriggers();
 }, 1000 / 20);
 
 var port = process.env.PORT | 3000;

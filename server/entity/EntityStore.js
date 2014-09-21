@@ -11,6 +11,11 @@ var EntityStore = merge(EventEmitter.prototype, {
       return _entities[key];
     });
   },
+  consumeTriggers: function () {
+    Object.keys(_entities).forEach(function (key) {
+      _entities[key].triggers = [];
+    });
+  },
   dispatcherToken: gameDispatcher.register(function (payload) {
     var action = payload.action;
     switch (payload.actionType) {
@@ -28,6 +33,10 @@ var EntityStore = merge(EventEmitter.prototype, {
           entity.position.x += action.dx;
           entity.position.y += action.dy;
         }
+        break;
+      case "slash":
+        var entity = _entities[payload.source];
+        entity.trigger('slash');
         break;
     }
     return true;

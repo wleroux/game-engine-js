@@ -3,7 +3,8 @@ function Options() {
       37: 'LEFT',
       38: 'UP',
       39: 'RIGHT',
-      40: 'DOWN'
+      40: 'DOWN',
+      32: 'SLASH'
    };
 
    this.char = {
