@@ -3,6 +3,7 @@
   "repeat": false,
   "singleDirection": false,
   "duration": 0.1,
+  "offset": [-32, -64],
   "parts": ["BODY", "FEET", "LEGS", "TORSO", "BELT", "HEAD", "HANDS", "WEAPON"],
   "sprite": "slash",
   "sequence": [0, 1, 2, 3, 4, 5]

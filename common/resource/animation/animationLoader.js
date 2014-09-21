@@ -33,6 +33,7 @@ function struct(json) {
 
 function lpc(json) {
   var animation = new Animation();
+  var offset = json.offset || [0, 0];
   animation.repeat = json.repeat;
   json.sequence.forEach(function (seq) {
     var step = new AnimationStep();
@@ -44,7 +45,7 @@ function lpc(json) {
         var x = seq * 64;
         var y = (json.singleDirection ? 0 : direction) * 64;
         step.addSprite(
-          direction, new Sprite(image, x, y, 64, 64), 0, 0
+          direction, new Sprite(image, x, y, 64, 64), offset[0], offset[1]
         );
       });
     }); 
