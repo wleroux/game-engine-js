@@ -2,7 +2,9 @@ var animationRenderer = require('../animation');
 
 var STATES = {
   IDLE: "asset/animation/idle.ani",
-  WALK: "asset/animation/walk.ani"
+  WALK: "asset/animation/walk.ani",
+  SLASH: "asset/animation/slash.ani",
+  HURT: "asset/animation/hurt.ani"
 }
 
 var Entity = require('../../../common/entity/Entity');

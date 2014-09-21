@@ -41,8 +41,10 @@ function lpc(json) {
     json.parts.forEach(function (part) {
       [0,1,2,3].forEach(function (direction) {
         var image = "asset/lpc/" + json.sprite + "/" + part + "_%" + part + "%.png";
+        var x = seq * 64;
+        var y = (json.singleDirection ? 0 : direction) * 64;
         step.addSprite(
-          direction, new Sprite(image, seq * 64, direction * 64, 64, 64), 0, 0
+          direction, new Sprite(image, x, y, 64, 64), 0, 0
         );
       });
     }); 

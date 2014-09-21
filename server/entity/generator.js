@@ -8,7 +8,8 @@ var availableParts = {
   "feet": [null, "plate_armor_shoes", "shoes_brown"],
   "hands": [null, "plate_armor_gloves"],
   "head": [null, "chain_armor_helmet", "chain_armor_hood", "hair_blonde", "leather_armor_hat", "plate_armor_helmet", "robe_hood"],
-  "torso": [null, "chain_armor_jacket_purple", "chain_armor_torso", "leather_armor_bracers", "leather_armor_shirt_white", "leather_armor_torso", "plate_armor_torso", "robe_shirt_brown"]
+  "torso": [null, "chain_armor_jacket_purple", "chain_armor_torso", "leather_armor_bracers", "leather_armor_shirt_white", "leather_armor_torso", "plate_armor_torso", "robe_shirt_brown"],
+  "weapon": ["dagger"]
 };
 
 var Entity = require('../../common/entity/Entity');
