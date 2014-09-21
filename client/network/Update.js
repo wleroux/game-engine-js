@@ -11,7 +11,7 @@ function update(message) {
     var id = jsonEntity.id;
     if (game.entities.hasOwnProperty(id)) {
       var entity = game.entities[id];
-      entity.body = jsonEntity.body;
+      entity.parts = jsonEntity.parts;
       entity.direction = jsonEntity.direction;
 
       var interpolationEnabled = options.lag.interpolation;
@@ -33,7 +33,7 @@ function update(message) {
     } else {
       var entity = new Entity(
         jsonEntity.id,
-        jsonEntity.body,
+        jsonEntity.parts,
         {
           level: jsonEntity.position.level,
           layer: jsonEntity.position.layer,

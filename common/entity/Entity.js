@@ -1,6 +1,6 @@
-function Entity(id, body, position, direction) {
+function Entity(id, parts, position, direction) {
    this.id = id;
-   this.body = body;
+   this.parts = parts;
    this.position = position;
    this.direction = direction;
 }

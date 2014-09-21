@@ -5,20 +5,11 @@ function AnimationStep() {
    ];
 }
 
-AnimationStep.prototype.addSprite = function addSprite(direction, image, dx, dy) {
+AnimationStep.prototype.addSprite = function (direction, sprite, dx, dy) {
    this.sprites[direction].push({
-      image: image,
+      sprite: sprite,
       dx: dx,
       dy: dy
-   });
-};
-
-AnimationStep.prototype.render = function render(ctx, actor) {
-   this.sprites[actor.direction].forEach(function (sprite) {
-      ctx.save();
-      ctx.translate(sprite.dx, sprite.dy);
-      sprite.image.render(ctx, actor);
-      ctx.restore();
    });
 };
 

@@ -31,11 +31,11 @@ AnimationRenderer.prototype.render = function render(ctx, source, timer, actor) 
 
   var animation = this.get(source);
   var step = animation.currentStep(timer);
-  step.sprites[actor.direction].forEach(function (sprite) {
+  step.sprites[actor.direction].forEach(function (spriteInfo) {
     ctx.save();
-    ctx.translate(sprite.dx, sprite.dy);
-    var image = sprite.image;
-    imageRenderer.render(ctx, image.image(actor), image.x, image.y, image.width, image.height);
+    ctx.translate(spriteInfo.dx, spriteInfo.dy);
+    var sprite = spriteInfo.sprite;
+    imageRenderer.render(ctx, sprite.image(actor), sprite.x, sprite.y, sprite.width, sprite.height);
     ctx.restore();
   });
 };

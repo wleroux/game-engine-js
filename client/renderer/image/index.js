@@ -25,6 +25,8 @@ ImageRenderer.prototype.getImage = function (image) {
 };
 
 ImageRenderer.prototype.render = function (ctx, image, x, y, width, height) {
+  if (image === null) return;
+
   if (this.isLoaded(image)) {
     ctx.drawImage(this.getImage(image), x, y, width, height, 0, 0, width, height);
   } else {

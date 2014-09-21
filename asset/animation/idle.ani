@@ -1,16 +1,8 @@
 {
-  "format": "struct",
+  "format": "lpc",
   "repeat": true,
-  "steps": [{
-    "duration": 1,
-    "sprites": [[
-      ["BODY",  0,   0, 64, 64, -32, -32]
-    ], [
-      ["BODY",  0,  64, 64, 64, -32, -32]
-    ], [
-      ["BODY",  0, 128, 64, 64, -32, -32]
-    ], [
-      ["BODY",  0, 192, 64, 64, -32, -32]
-    ]] 
-  }]
+  "duration": 1,
+  "parts": ["BEHIND", "BODY", "FEET", "LEGS", "TORSO", "BELT", "HEAD", "HANDS", "WEAPON"],
+  "sprite": "walkcycle",
+  "sequence": [0]
 }

@@ -31,9 +31,33 @@ function struct(json) {
   return animation;
 }
 
+function lpc(json) {
+  var animation = new Animation();
+  animation.repeat = json.repeat;
+  json.sequence.forEach(function (seq) {
+    var step = new AnimationStep();
+    step.duration = json.duration;
+    
+    json.parts.forEach(function (part) {
+      [0,1,2,3].forEach(function (direction) {
+        var image = "asset/lpc/" + json.sprite + "/" + part + "_%" + part + "%.png";
+        step.addSprite(
+          direction, new Sprite(image, seq * 64, direction * 64, 64, 64), 0, 0
+        );
+      });
+    }); 
+
+    animation.addStep(step);
+  });
+
+  return animation;
+}
+
 AnimationLoader.prototype.load = function load(json) {
   var animation = new Animation();
   switch (json.format) {
+  case "lpc":
+    return lpc(json);
   case "struct":
   default:
     return struct(json);
