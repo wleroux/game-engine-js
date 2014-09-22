@@ -47,11 +47,12 @@ function update(message) {
       game.entities[entity.id] = entity;
     }
 
-    if (!localEntity) {
-      jsonEntity.triggers.forEach(function (trigger) {
+    var localTriggers = ["slash"];
+    jsonEntity.triggers.forEach(function (trigger) {
+      if (localTriggers.indexOf(trigger) === -1 || !localEntity) {
         entity.trigger(trigger);
-      });
-    }
+      }
+    });
   });
   lastUpdate = message.time;
 

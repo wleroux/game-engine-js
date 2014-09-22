@@ -16,6 +16,10 @@ Entity.prototype.consumeTrigger = function (id) {
   }
 };
 
+Entity.prototype.consumeAllTriggers = function() {
+  this.triggers = [];
+};
+
 Entity.prototype.trigger = function (id) {
   if (!this.hasTrigger(id)) {
     this.triggers.push(id);

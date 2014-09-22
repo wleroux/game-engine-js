@@ -54,7 +54,7 @@ function canTakeAction(state) {
 
 RenderableEntity.prototype.render = function (ctx) {
   var state = this.lastState;
-  if (state === "SLASH" && animationRenderer.isDone(STATES[state], this.timer)) {
+  if ((state === "HURT" || state === "SLASH") && animationRenderer.isDone(STATES[state], this.timer)) {
     this.timer = 0;
     state = "IDLE";
   }
@@ -66,6 +66,11 @@ RenderableEntity.prototype.render = function (ctx) {
 
   if (canTakeAction(state)) {
     state = this.parameters.speed === 0 ? "IDLE" : "WALK";
+  }
+
+  if (this.hasTrigger("hurt")) {
+    this.consumeTrigger("hurt");
+    state = "HURT";
   }
 
   // reset timer if needed
