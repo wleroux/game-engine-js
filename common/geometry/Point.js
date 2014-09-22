@@ -8,14 +8,16 @@ Point.prototype.distanceTo = function(point) {
 };
 
 Point.prototype.translateByDirection = function (direction, distance) {
-  if (direction == 0) {
+  if (direction === 0) {
     return new Point(this.x, this.y - distance);
-  } else if (direction == 1) {
+  } else if (direction === 1) {
     return new Point(this.x - distance, this.y);
-  } else if (direction == 2) {
+  } else if (direction === 2) {
     return new Point(this.x, this.y + distance);
-  } else if (direction == 3) {
+  } else if (direction === 3) {
     return new Point(this.x + distance, this.y);
+  } else {
+    return undefined;
   }
 };
 
