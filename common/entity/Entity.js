@@ -1,9 +1,9 @@
 function Entity(id, parts, position, direction) {
-   this.id = id;
-   this.parts = parts;
-   this.position = position;
-   this.direction = direction;
-   this.triggers = [];
+  this.id = id;
+  this.parts = parts;
+  this.position = position;
+  this.direction = direction;
+  this.triggers = [];
 }
 
 Entity.prototype.hasTrigger = function (id) {
